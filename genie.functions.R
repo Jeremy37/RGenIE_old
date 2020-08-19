@@ -6,7 +6,7 @@ suppressMessages(library(cowplot)) # could probably use just one of these two pl
 suppressMessages(library(ggdendro))
 suppressMessages(library(variancePartition))
 suppressMessages(library(doParallel))
-suppressMessages(library(isofor))
+#suppressMessages(library(isofor))
 suppressMessages(library(FNN))
 suppressMessages(library(broom))
 suppressMessages(library(lmerTest))
@@ -1882,9 +1882,9 @@ getReplicateQCMetrics = function(stats.df, replicate.udp.df, max_udps = 20, min_
     stats_nnd <- rowMeans(stats_nn$nn.dist)
     stats.new.df[stats.new.df$type == "cDNA",]$outlier_score_knn = stats_nnd
     # Compute isolation forest outlier metric
-    stats_forest <- iForest(stats.cDNA.df, nt = 100, phi = n_cDNA)
-    forest_score <- predict(stats_forest, newdata = stats.cDNA.df)
-    stats.new.df[stats.new.df$type == "cDNA",]$outlier_score_iso <- forest_score
+    #stats_forest <- iForest(stats.cDNA.df, nt = 100, phi = n_cDNA)
+    #forest_score <- predict(stats_forest, newdata = stats.cDNA.df)
+    #stats.new.df[stats.new.df$type == "cDNA",]$outlier_score_iso <- forest_score
 
     stats.new.df[stats.new.df$type == "cDNA",]$is_outlier = F
     if (opt$qc_outlier_threshold > 0) {
@@ -1903,9 +1903,9 @@ getReplicateQCMetrics = function(stats.df, replicate.udp.df, max_udps = 20, min_
     stats_nnd <- rowMeans(stats_nn$nn.dist)
     stats.new.df[stats.new.df$type == "gDNA",]$outlier_score_knn = stats_nnd
 
-    stats_forest <- iForest(stats.gDNA.df, nt = 100, phi = n_gDNA)
-    forest_score <- predict(stats_forest, newdata = stats.gDNA.df)
-    stats.new.df[stats.new.df$type == "gDNA",]$outlier_score_iso <- forest_score
+    #stats_forest <- iForest(stats.gDNA.df, nt = 100, phi = n_gDNA)
+    #forest_score <- predict(stats_forest, newdata = stats.gDNA.df)
+    #stats.new.df[stats.new.df$type == "gDNA",]$outlier_score_iso <- forest_score
 
     stats.new.df[stats.new.df$type == "gDNA",]$is_outlier = F
     if (opt$qc_outlier_threshold > 0) {
